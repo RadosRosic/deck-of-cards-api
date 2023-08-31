@@ -14,7 +14,9 @@ export default class NewDecksController {
 
         const pile = new Pile()
         pile.deckExternalId = deck.externalId;
-        pile.name = pileName
+        if (typeof pileName === 'string') {
+            pile.name = pileName
+        }
         await pile.save()
 
         const basicCards = await BasicCard.query().select('code')
