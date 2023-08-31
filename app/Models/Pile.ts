@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, HasMany, belongsTo, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Deck from './Deck'
+import Card from './Card'
 
 export default class Pile extends BaseModel {
   @column({ isPrimary: true })
@@ -13,6 +14,9 @@ export default class Pile extends BaseModel {
 
   @column()
   public name: string
+
+  @hasMany(() => Card)
+  public card: HasMany<typeof Card>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
