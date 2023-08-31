@@ -11,13 +11,17 @@ export default class ViewCardsController {
             return response.status(400).send({ ok: false, message: "deckId and pileName are mandatory params." })
         }
 
+        if (count <= 0 || isNaN(count)) {
+            return response.status(400).send({ ok: false, message: "Count must be a number and greater than 0!" })
+        }
+
         const pile = await Pile.query().where((query) => {
             query
                 .where('deck_external_id', "=", deckId)
                 .where('name', "=", pileName)
-        })
+        }).first()
 
-        if (pile.length === 0) {
+        if (!pile) {
             return response.status(400).send({ ok: false, message: "No such deck or pile." })
         }
 
