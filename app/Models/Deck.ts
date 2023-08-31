@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, HasMany, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { randomUUID } from 'crypto'
+import { BaseModel, HasMany, beforeCreate, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Pile from './Pile'
 
 export default class Deck extends BaseModel {
@@ -20,4 +21,9 @@ export default class Deck extends BaseModel {
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
+
+  @beforeCreate()
+  public static assignExternalId(deck: Deck) {
+    deck.externalId = randomUUID()
+  }
 }

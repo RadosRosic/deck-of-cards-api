@@ -8,8 +8,8 @@ export default class Pile extends BaseModel {
   public id: number
 
   @column()
-  public deckId: string
-  @belongsTo(() => Deck)
+  public deckExternalId: string
+  @belongsTo(() => Deck, { foreignKey: "external_id" })
   public deck: BelongsTo<typeof Deck>
 
   @column()
@@ -20,7 +20,4 @@ export default class Pile extends BaseModel {
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
 }
