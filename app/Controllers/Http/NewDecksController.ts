@@ -20,7 +20,7 @@ export default class NewDecksController {
         await pile.save()
 
         const basicCards = await BasicCard.query().select('code')
-        const cards = basicCards.map((basicCard, i) => { return { ...basicCard.$attributes, position: i + 1, pileId: pile.id } })
+        const cards = basicCards.map((basicCard, i) => { return { code: basicCard.$attributes.code, position: i + 1, pileId: pile.id } })
 
         if (shuffle) {
             const shuffledCards = ShuffleService.shuffle(cards)
@@ -29,6 +29,6 @@ export default class NewDecksController {
             await Card.createMany(cards)
         }
 
-        return response.status(200).send({ ok: true, shuffle })
+        return response.status(200).send({ ok: true, shuffle, deckId: deck.externalId, pileName: pile.name || "BasePile" })
     }
 }
