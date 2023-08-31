@@ -7,7 +7,7 @@ Route.group(() => {
 
   Route.post("draw", "")
 
-  Route.post("shuffle", "")
+  Route.post("shuffle", "ShuffleCardsController.shuffle")
 
   Route.post("view", "ViewCardsController.view")
 }).prefix("api")
