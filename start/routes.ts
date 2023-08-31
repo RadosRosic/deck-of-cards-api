@@ -1,7 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.post("new-deck", "")
+  Route.post("new-deck", "NewDecksController.create")
 
   Route.post("new-pile", "")
 

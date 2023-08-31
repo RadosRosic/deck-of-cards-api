@@ -4,7 +4,7 @@ import Env from "@ioc:Adonis/Core/Env";
 
 export default class extends BaseSeeder {
   public async run() {
-    const url = Env.get('URL') || "http://127.0.0.1"
+    const url = Env.get("URL") || "http://127.0.0.1"
     const port = Env.get("PORT") || "3333"
 
     const suits = ['SPADES', 'DIAMONDS', 'CLUBS', 'HEARTS'];
