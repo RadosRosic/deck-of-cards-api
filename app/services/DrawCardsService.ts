@@ -15,7 +15,9 @@ export default class DrawCardsService {
             card.pileId = toCardsId;
         })
 
-        return { updatedFromCards: fromCardsCopy, updatedToCards: toCardsCopy }
+        const drawnCardsCodes = drawnCards.map(card => card.code)
+
+        return { drawnCardsCodes, updatedFromCards: fromCardsCopy, updatedToCards: toCardsCopy }
     }
 
     public static updatePositionsAndPiles() {

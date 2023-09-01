@@ -1,4 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from '@ioc:Adonis/Lucid/Database'
+import BasicCard from 'App/Models/BasicCard'
 import Card from 'App/Models/Card'
 import Pile from 'App/Models/Pile'
 import DrawCardsService from 'App/services/DrawCardsService'
@@ -39,7 +41,7 @@ export default class DrawCardsController {
 
         const fromCards = await Card.query().where("pile_id", "=", fromPile.id)
         const toCards = toPile ? await Card.query().where("pile_id", "=", toPile.id) : []
-        const { updatedFromCards, updatedToCards } = DrawCardsService.draw({ fromCards, toCards, amount, toCardsId: toPile.id })
+        const { updatedFromCards, updatedToCards, drawnCardsCodes } = DrawCardsService.draw({ fromCards, toCards, amount, toCardsId: toPile.id })
 
         for (const card of updatedFromCards) {
             await card?.save?.()
@@ -48,6 +50,10 @@ export default class DrawCardsController {
         for (const card of updatedToCards) {
             await card?.save?.()
         }
+
+        const cards = await Database.from('basic_cards').select('code', 'suit', 'rank', 'img').whereIn('code', drawnCardsCodes)
+
+        return response.status(200).send({ ok: true, cards })
 
     }
 }
