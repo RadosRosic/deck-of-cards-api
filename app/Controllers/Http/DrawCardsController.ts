@@ -1,6 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
-import BasicCard from 'App/Models/BasicCard'
 import Card from 'App/Models/Card'
 import Pile from 'App/Models/Pile'
 import DrawCardsService from 'App/services/DrawCardsService'
