@@ -3,7 +3,7 @@ import BasicCard from 'App/Models/BasicCard'
 import Card from 'App/Models/Card'
 import Deck from 'App/Models/Deck'
 import Pile from 'App/Models/Pile'
-import ShuffleService from 'App/services/ShuffleService'
+import ShuffleService from 'App/services/ShuffleCardsService'
 
 export default class NewDecksController {
     public async create({ request, response }: HttpContextContract) {

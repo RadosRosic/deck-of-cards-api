@@ -5,7 +5,7 @@ Route.group(() => {
 
   Route.post("new-pile", "")
 
-  Route.post("draw", "")
+  Route.post("draw", "DrawCardsController.draw")
 
   Route.post("shuffle", "ShuffleCardsController.shuffle")
 

@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Card from 'App/Models/Card'
 import Pile from 'App/Models/Pile'
-import ShuffleService from 'App/services/ShuffleService'
+import ShuffleService from 'App/services/ShuffleCardsService'
 
 export default class ShuffleCardsController {
     public async shuffle({ request, response }: HttpContextContract) {
@@ -25,7 +25,7 @@ export default class ShuffleCardsController {
         const shuffledCards = ShuffleService.shuffle(cards)
 
         for (const card of shuffledCards) {
-            await card.save()
+            await card.save?.()
         }
 
         return response.status(200).send({ ok: true })
