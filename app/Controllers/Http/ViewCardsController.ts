@@ -11,7 +11,7 @@ export default class ViewCardsController {
             return response.status(400).send({ ok: false, message: "deckId and pileName are mandatory params." })
         }
 
-        if (count <= 0 || isNaN(count)) {
+        if (count <= 0 || isNaN(count) && count !== undefined) {
             return response.status(400).send({ ok: false, message: "Count must be a number and greater than 0!" })
         }
 
