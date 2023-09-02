@@ -19,7 +19,7 @@ export default class NewDecksController {
         }
         await pile.save()
 
-        const basicCards = await BasicCard.query().select('code')
+        const basicCards = await BasicCard.query().select('code').orderBy('id')
         const cards = basicCards.map((basicCard, i) => { return { code: basicCard.$attributes.code, position: i + 1, pileId: pile.id } })
 
         if (shuffle) {
