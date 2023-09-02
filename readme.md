@@ -26,6 +26,8 @@ After selecting the db, an .env file will be created.
 
 ### Edit .env file
 
+Copy .env.example into your .env file.
+
 Edit .env file and enter your own database name, username, and password.
 
 ### Run database migrations
