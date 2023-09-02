@@ -6,7 +6,7 @@ import DrawCardsService from 'App/services/DrawCardsService'
 
 export default class DrawCardsController {
     public async draw({ request, response }: HttpContextContract) {
-        const { deckId, fromPileName, toPileName, amount } = request.body()
+        const { deckId, fromPileName, toPileName, amount = 1 } = request.body()
 
         if (!deckId || !fromPileName) {
             return response.status(400).send({ ok: false, message: "deckId and fromPileName are mandatory params." })
@@ -34,12 +34,11 @@ export default class DrawCardsController {
 
         if (!toPile) {
             toPile = await Pile.create({ deckExternalId: deckId, name: toPileName })
-            toPile.save()
-            console.log('toPileId', toPile.id)
+            await toPile.save()
         }
 
-        const fromCards = await Card.query().where("pile_id", "=", fromPile.id)
-        const toCards = toPile ? await Card.query().where("pile_id", "=", toPile.id) : []
+        const fromCards = await Card.query().where("pile_id", "=", fromPile.id).orderBy("position", "asc")
+        const toCards = toPile ? await Card.query().where("pile_id", "=", toPile.id).orderBy("position", "asc") : []
         const { updatedFromCards, updatedToCards, drawnCardsCodes } = DrawCardsService.draw({ fromCards, toCards, amount, toCardsId: toPile.id })
 
         for (const card of updatedFromCards) {

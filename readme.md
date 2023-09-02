@@ -41,5 +41,3 @@ Edit .env file and enter your own database name, username, and password.
     node ace serve --watch
 
 ## Routes and how to use
-
-TO DO!
