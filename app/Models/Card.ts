@@ -3,6 +3,7 @@ import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Pile from './Pile'
 import BasicCard from './BasicCard'
 
+
 export default class Card extends BaseModel {
   @column({ isPrimary: true })
   public id: number
@@ -25,4 +26,5 @@ export default class Card extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
 }

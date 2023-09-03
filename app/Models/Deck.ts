@@ -26,4 +26,5 @@ export default class Deck extends BaseModel {
   public static assignExternalId(deck: Deck) {
     deck.externalId = randomUUID()
   }
+
 }
