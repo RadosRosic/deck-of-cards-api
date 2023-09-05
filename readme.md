@@ -78,11 +78,13 @@ Example response:
 
 Route: `/draw`
 
-There are 3 mandatory parameters and 1 optional.
+There are 3 mandatory and 3 optional parameters.
 
     deckId: UUID,
     fromPileName: string
     toPileName: string
+    fromSide?: 'top' | 'bot'
+    toSide?: 'top' | 'bot'
     amount?: number
 
 `deckId` must be a valid deck id.
@@ -90,6 +92,8 @@ There are 3 mandatory parameters and 1 optional.
 `fromPileName` must be as valid pile that belongs to deckId.
 
 `toPileName` if a pile of that name exists it will be used, otherwise it will be created.
+
+`fromSide` and `toSide` must be either 'top' or 'bot' string. Defaults to 'top'.
 
 `amount` must be a number greater than 0. Defaults to 1.
 
